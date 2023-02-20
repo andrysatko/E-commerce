@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import {ConfigModule} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
+import {User} from "./db_models/user.entity";
 
 
 @Module({
@@ -17,7 +18,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
       username: process.env.type,
       password: process.env.password,
       database: process.env.database,
-      entities: [],
+      entities: [User,],
       synchronize: true,
   }),
       UsersModule],
