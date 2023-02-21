@@ -22,5 +22,4 @@ export class User {
 
     @Column({default:false})
     confirmed:boolean
-
 }
