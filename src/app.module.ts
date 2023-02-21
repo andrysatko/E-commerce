@@ -6,6 +6,7 @@ import {ConfigModule} from "@nestjs/config";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "./db_models/user.entity";
 import {JwtCommonModule} from "./common/jwt_common.module";
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -23,7 +24,8 @@ import {JwtCommonModule} from "./common/jwt_common.module";
       synchronize: true,
   }),
       UsersModule,
-      JwtCommonModule],
+      JwtCommonModule,
+      AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

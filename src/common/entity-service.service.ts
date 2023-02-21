@@ -4,6 +4,7 @@ import {Repository} from "typeorm";
 
 @Injectable()
 export abstract class Common_EntityService <CreateDto,UpdateData>{
+
     protected constructor(protected readonly repository: Repository<any>) {
     }
 
