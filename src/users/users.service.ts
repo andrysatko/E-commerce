@@ -3,7 +3,8 @@ import {Common_EntityService} from "../common/entity-service.service";
 import {InjectRepository} from "@nestjs/typeorm";
 import {User} from "../db_models/user.entity";
 import {Repository} from "typeorm";
-import {CreateUserDTO, dynamicUserDto} from "./CreateUser_dto";
+import {CreateUserDTO} from "../DTO/CreateUser_dto";
+import {dynamicUserDto} from "../DTO/UpdateUser_dto";
 import * as bcrypt from "bcrypt"
 
 

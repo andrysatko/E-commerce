@@ -11,7 +11,9 @@ import {
     UseInterceptors
 } from '@nestjs/common';
 import {UsersService} from "./users.service";
-import {CreateUserDTO, dynamicUserDto} from "./CreateUser_dto";
+import {CreateUserDTO} from "../DTO/CreateUser_dto";
+import {dynamicUserDto} from "../DTO/UpdateUser_dto"
+
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller('users')
