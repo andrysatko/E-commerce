@@ -4,9 +4,10 @@ import {CreateUserDTO} from "../DTO/CreateUser_dto";
 import {User} from "../db_models/user.entity";
 import * as bcrypt from "bcrypt"
 import {JwtService} from "@nestjs/jwt";
+import {NodemailerService} from "../nodemailer/nodemailer.service";
 @Injectable()
 export class AuthService {
-    constructor(private userService: UsersService ) {
+    constructor(private userService: UsersService,private NodemailerService:NodemailerService) {
     }
 
     async addUser(UserDto: CreateUserDTO): Promise<User> {
@@ -15,7 +16,10 @@ export class AuthService {
         }
         try {
             const hash_Password = this.userService.Hashing(UserDto.password)
-            return await this.userService.createOne({...UserDto,password:hash_Password});
+            const user = await this.userService.createOne({...UserDto,password:hash_Password});
+            console.log(UserDto.email)
+            await this.NodemailerService.main(UserDto.email,hash_Password)
+            return user
         } catch (e) {
             console.log(e);
         }
@@ -25,6 +29,15 @@ export class AuthService {
         if(!user){throw new NotFoundException('user not found');}
         if(!await bcrypt.compare(password,user.password)){throw new BadRequestException('incorrect password');}
         return user
+    }
+
+    async confirmRegistration(confirmationLInk:string){
+        const user = await  this.userService.findOne({password:confirmationLInk})
+        if(!user){throw new NotFoundException('wrong confirmation link');}
+        if(user.confirmed==false){
+            await this.userService.updateOne({confirmed:true},user.id)
+            console.log('user is auth now ')
+        }
     }
 
 

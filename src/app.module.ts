@@ -7,6 +7,7 @@ import {TypeOrmModule} from "@nestjs/typeorm";
 import {User} from "./db_models/user.entity";
 import {JwtCommonModule} from "./common/jwt_common.module";
 import { AuthModule } from './auth/auth.module';
+import { NodemailerModule } from './nodemailer/nodemailer.module';
 
 
 @Module({
@@ -25,7 +26,8 @@ import { AuthModule } from './auth/auth.module';
   }),
       UsersModule,
       JwtCommonModule,
-      AuthModule],
+      AuthModule,
+      NodemailerModule],
   controllers: [AppController],
   providers: [AppService],
 })
