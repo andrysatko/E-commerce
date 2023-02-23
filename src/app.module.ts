@@ -8,6 +8,8 @@ import {User} from "./db_models/user.entity";
 import {JwtCommonModule} from "./common/jwt_common.module";
 import { AuthModule } from './auth/auth.module';
 import { NodemailerModule } from './nodemailer/nodemailer.module';
+import { RolesModule } from './roles/roles.module';
+import {Role} from "./db_models/role.entity";
 
 
 @Module({
@@ -21,13 +23,14 @@ import { NodemailerModule } from './nodemailer/nodemailer.module';
       username: process.env.type,
       password: process.env.password,
       database: process.env.database,
-      entities: [User,],
+      entities: [User,Role],
       synchronize: true,
   }),
       UsersModule,
       JwtCommonModule,
       AuthModule,
-      NodemailerModule],
+      NodemailerModule,
+      RolesModule],
   controllers: [AppController],
   providers: [AppService],
 })
