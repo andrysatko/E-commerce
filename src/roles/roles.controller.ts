@@ -1,19 +1,34 @@
-import {Body, Controller, Get, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import {create_updateRole, RolesService} from "./roles.service";
 
 @Controller('roles')
 export class RolesController {
-    constructor(private RoleService:RolesService) {
+    constructor(private RoleService: RolesService) {
     }
 
     @Get()
-    getAll(){
+    async getAll() {
         return this.RoleService.findAll()
     }
 
     @Post()
-    createRole(@Body() body:create_updateRole){
+    async createRole(@Body() body: create_updateRole) {
         return this.RoleService.createOne(body)
     }
 
+    @Get('findRole')
+    async findRole(@Body() body: create_updateRole) {
+        return this.RoleService.findOne(body)
+    }
+
+    @Delete(':id')
+    async deleteRole(@Param('id') id: number) {
+        await this.RoleService.delete({id: id})
+        return `Role with id:${id} was deleted`
+    }
+
+    @Put(':id')
+    async updateRole(@Body() body: create_updateRole, @Param('id') id: number) {
+        return  await this.RoleService.updateOne(body, id)
+    }
 }

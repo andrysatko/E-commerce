@@ -16,7 +16,7 @@ export class AuthService {
         }
         try {
             const hash_Password = this.userService.Hashing(UserDto.password)
-            const user = await this.userService.createOne({...UserDto,password:hash_Password,role:{id:1}});
+            const user = await this.userService.createOne({...UserDto,password:hash_Password});
             await this.NodemailerService.main(UserDto.email,hash_Password)
             return user
         } catch (e) {

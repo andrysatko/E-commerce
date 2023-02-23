@@ -8,13 +8,14 @@ import {Role} from "./role.entity";
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
+
     @Column()
     firstName: string;
 
     @Column()
     lastName: string;
 
-    @Column({unique:true,})
+    @Column({unique:true})
     email: string;
 
     @Column()
@@ -24,7 +25,8 @@ export class User {
     @Column({default:false})
     confirmed:boolean
 
-    @OneToOne(()=>Role,(Role)=>Role.role)
-    @JoinColumn({name:'role_key'})
+
+    @ManyToOne(() => Role,(role)=>role.id)
+    @JoinColumn()
     role:Role
 }

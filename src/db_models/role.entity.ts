@@ -8,10 +8,6 @@ export class Role {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Length(1,10)
     @Column()
     role: string;
-
-    @OneToOne(()=>User,(user)=>user.role)
-    user:User
 }

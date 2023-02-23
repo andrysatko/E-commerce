@@ -22,7 +22,7 @@ export class CreateUserDTO {
     confirm_password: string
 
     @IsNotEmpty()
-    role: { id:number }
+    role: number
 }
 
 
